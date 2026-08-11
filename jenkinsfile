@@ -3,14 +3,17 @@ pipeline {
         label "worker"
     }
 
+    // environment {
+    //     my_aws_credentials = credentials('aws-access')
+    // }
+
     tools {
         maven "maven"
     }
 
     stages {
         stage('checkout'){
-            steps{
-                // git 'https://github.com/salonikakriye/Jenkins.git'
+            steps {
                 git 'https://github.com/salonikakriye/Jenkins.git'
                 sh '''
                 echo "clonning is successful"
@@ -25,7 +28,6 @@ pipeline {
                 echo "build is successful"
                 '''
             }
-
             post {
                 success {
                     archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
@@ -33,19 +35,19 @@ pipeline {
             }
         }
 
-        // stage('Artifact to s3') {
+        // stage('Artifact to S3'){
         //     steps {
         //         sh '''
-        //         aws s3 cp target/*.war s3://deploywithsaloni.space/Artifact/student.war
+        //         aws s3 cp target/*.war s3://mayurcbz.space/Artifact/student.war
         //         '''
         //     }
         // }
 
         // stage('SonarQube Analysis'){
-        //     steps{
+        //     steps {
         //         withSonarQubeEnv('sonar') {
-        //             sh 'mvn sonar:sonar'
-        //         }
+        //           sh 'mvn sonar:sonar'
+        //         } 
         //     }
         // }
     }
