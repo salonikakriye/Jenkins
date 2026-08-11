@@ -3,9 +3,9 @@ pipeline {
         label "worker"
     }
 
-    // environment {
-    //     my_aws_credentials = credentials('aws-access')
-    // }
+    environment {
+        my_aws_credentials = credentials('aws-access')
+    }
 
     tools {
         maven "maven"
@@ -14,7 +14,6 @@ pipeline {
     stages {
         stage('checkout'){
             steps {
-                // git 'https://github.com/salonikakriye/Jenkins.git'
                 git 'https://github.com/mayurpandit25/student-management.git'
                 sh '''
                 echo "clonning is successful"
@@ -36,13 +35,13 @@ pipeline {
             }
         }
 
-        // stage('Artifact to S3'){
-        //     steps {
-        //         sh '''
-        //         aws s3 cp target/*.war s3://mayurcbz.space/Artifact/student.war
-        //         '''
-        //     }
-        // }
+        stage('Artifact to S3'){
+            steps {
+                sh '''
+                aws s3 cp target/*.war s3://deploywithsaloni.space/Artifact/student.war
+                '''
+            }
+        }
 
         // stage('SonarQube Analysis'){
         //     steps {
