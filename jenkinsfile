@@ -32,13 +32,13 @@ pipeline {
             }
         }
 
-        stage('Artifact to s3') {
-            steps {
-                sh '''
-                aws s3 cp target/*.war s3://deploywithsaloni.space/Artifact/student.war
-                '''
-            }
-        }
+        // stage('Artifact to s3') {
+        //     steps {
+        //         sh '''
+        //         aws s3 cp target/*.war s3://deploywithsaloni.space/Artifact/student.war
+        //         '''
+        //     }
+        // }
 
         stage('SonarQube Analysis'){
             steps{
